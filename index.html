@@ -1,0 +1,668 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Samar Das - AI Developer & ML Engineer. Explore my projects, contributions, and research.">
+    <meta name="theme-color" content="#0a0e27">
+    <title>Samar Das | AI Engineer</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&family=Sora:wght@300;400;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"> -->
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600&family=Lora:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            font-family: 'Sora', sans-serif;
+        }
+        
+        .font-mono {
+            font-family: 'JetBrains Mono', monospace;
+        }
+        
+        /* Custom color variables */
+        :root {
+            --primary: rgb(0, 217, 255);
+            --secondary: rgb(181, 55, 242);
+            --success: rgb(16, 185, 129);
+            --danger: rgb(239, 68, 68);
+            --bg-dark: rgb(10, 14, 39);
+            --bg-darker: rgb(5, 8, 20);
+            --bg-card: rgb(19, 24, 41);
+            --text-primary: rgb(232, 234, 246);
+            --text-secondary: rgb(176, 190, 197);
+        }
+        
+        body {
+            background: linear-gradient(135deg, var(--bg-dark) 0%, var(--bg-darker) 100%);
+            color: var(--text-primary);
+            min-height: 100vh;
+        }
+        
+        /* Grid background pattern */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(rgba(0, 217, 255, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 217, 255, 0.03) 1px, transparent 1px);
+            background-size: 50px 50px;
+            pointer-events: none;
+            z-index: 0;
+        }
+        
+        /* Radial gradient overlays */
+        body::after {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 20% 50%, rgba(0, 217, 255, 0.08) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(181, 55, 242, 0.08) 0%, transparent 50%);
+            pointer-events: none;
+            z-index: 0;
+        }
+        
+        .container-main {
+            position: relative;
+            z-index: 1;
+        }
+        
+        /* Glass morphism effect */
+        .glass {
+            background: rgba(19, 24, 41, 0.4);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(0, 217, 255, 0.1);
+            border-radius: 12px;
+        }
+        
+        .glass:hover {
+            border-color: rgba(0, 217, 255, 0.3);
+            box-shadow: 0 8px 32px rgba(0, 217, 255, 0.1);
+            transition: all 0.3s ease;
+        }
+        
+        /* Gradient text */
+        .gradient-text {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        /* Badge styling */
+        .badge {
+            display: inline-block;
+            padding: 0.35rem 0.85rem;
+            background: rgba(0, 217, 255, 0.1);
+            border: 1px solid rgba(0, 217, 255, 0.3);
+            border-radius: 9999px;
+            color: var(--primary);
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+        }
+        
+        /* Language badge with colors */
+        .lang-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            padding: 0.3rem 0.7rem;
+            background: rgba(181, 55, 242, 0.1);
+            border: 1px solid rgba(181, 55, 242, 0.2);
+            border-radius: 6px;
+            font-size: 0.75rem;
+            font-weight: 500;
+            color: var(--secondary);
+        }
+        
+        .lang-dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: currentColor;
+        }
+        
+        /* Animated border */
+        .animated-border {
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .animated-border::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, var(--primary), transparent);
+            animation: slide 2s infinite;
+        }
+        
+        @keyframes slide {
+            0% { left: -100%; }
+            50% { left: 100%; }
+            100% { left: 100%; }
+        }
+        
+        /* Loading skeleton */
+        .skeleton {
+            background: linear-gradient(90deg, rgba(0, 217, 255, 0.1), rgba(181, 55, 242, 0.1), rgba(0, 217, 255, 0.1));
+            background-size: 200% 100%;
+            animation: loading 1.5s ease-in-out infinite;
+        }
+        
+        @keyframes loading {
+            0% { background-position: 200% 0; }
+            100% { background-position: -200% 0; }
+        }
+        
+        /* Fade in animation */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .fade-in {
+            animation: fadeInUp 0.6s ease-out forwards;
+        }
+        
+        /* Smooth transitions */
+        button, a {
+            transition: all 0.3s ease;
+        }
+        
+        button:hover {
+            transform: translateY(-2px);
+        }
+        
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: rgba(0, 217, 255, 0.05);
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: rgba(0, 217, 255, 0.3);
+            border-radius: 5px;
+        }
+        
+        ::-webkit-scrollbar-thumb:hover {
+            background: rgba(0, 217, 255, 0.5);
+        }
+        
+        /* Stat counter animation */
+        .stat-number {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--primary);
+            font-family: 'JetBrains Mono', monospace;
+        }
+    </style>
+</head>
+<body>
+    <div class="container-main">
+        <!-- Navigation -->
+        <nav class="glass fixed top-0 left-0 right-0 z-50 border-b border-opacity-10">
+            <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center">
+                <a href="#" class="font-mono text-xl font-bold gradient-text">SD</a>
+                
+                <div class="hidden md:flex gap-6">
+                    <a href="#about" class="text-sm font-medium text-gray-400 hover:text-cyan-400 transition">About</a>
+                    <a href="#projects" class="text-sm font-medium text-gray-400 hover:text-cyan-400 transition">Projects</a>
+                    <a href="#stats" class="text-sm font-medium text-gray-400 hover:text-cyan-400 transition">Stats</a>
+                    <a href="#contact" class="text-sm font-medium text-gray-400 hover:text-cyan-400 transition">Contact</a>
+                </div>
+                
+                <a href="https://github.com/samar018" target="_blank" rel="noopener noreferrer" 
+                   class="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-cyan-400 text-cyan-400 text-sm font-medium hover:bg-cyan-400 hover:text-gray-900">
+                    <i class="fab fa-github"></i>
+                    <span class="hidden sm:inline">GitHub</span>
+                </a>
+            </div>
+        </nav>
+
+        <!-- Hero Section -->
+        <header class="min-h-screen flex items-center justify-center px-4 pt-20">
+            <div class="text-center max-w-3xl mx-auto fade-in">
+                <div class="mb-6 inline-block">
+                    <span class="badge">
+                        <i class="fas fa-code mr-2"></i> AI DEVELOPER & ML ENGINEER
+                    </span>
+                </div>
+                
+                <h1 class="text-5xl md:text-7xl font-bold mb-6 leading-tight">
+                    Building Intelligent
+                    <span class="gradient-text block">Systems with AI</span>
+                </h1>
+                
+                <p class="text-xl text-gray-400 mb-8 leading-relaxed max-w-2xl mx-auto">
+                    AI developer specializing in machine learning pipelines, LLM-based agents, and intelligent automation. 
+                    Transforming complex problems into elegant solutions.
+                </p>
+                
+                <div class="flex flex-col sm:flex-row gap-4 justify-center mb-16">
+                    <a href="#projects" class="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-lg bg-gradient-to-r from-cyan-500 to-blue-500 text-gray-900 font-semibold hover:shadow-lg hover:shadow-cyan-500/50">
+                        <i class="fas fa-arrow-down"></i> Explore Projects
+                    </a>
+                    <a href="mailto:samardas.cca@gmail.com" class="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-lg border border-cyan-400 text-cyan-400 font-semibold hover:bg-cyan-400/10">
+                        <i class="fas fa-envelope"></i> Get in Touch
+                    </a>
+                </div>
+                
+                <div class="flex justify-center gap-4">
+                    <a href="https://github.com/samar018" target="_blank" class="text-gray-400 hover:text-cyan-400 transition text-lg">
+                        <i class="fab fa-github"></i>
+                    </a>
+                    <a href="https://linkedin.com/in/samardas" target="_blank" class="text-gray-400 hover:text-cyan-400 transition text-lg">
+                        <i class="fab fa-linkedin"></i>
+                    </a>
+                    <a href="https://twitter.com/samardas" target="_blank" class="text-gray-400 hover:text-cyan-400 transition text-lg">
+                        <i class="fab fa-twitter"></i>
+                    </a>
+                </div>
+            </div>
+        </header>
+
+        <!-- About Section -->
+        <section id="about" class="py-20 px-4">
+            <div class="max-w-6xl mx-auto">
+                <h2 class="text-3xl md:text-4xl font-bold mb-12 gradient-text">About Me</h2>
+                
+                <div class="grid md:grid-cols-2 gap-12">
+                    <div class="space-y-6">
+                        <p class="text-gray-300 text-lg leading-relaxed">
+                            I'm an AI Developer and Machine Learning Engineer with 5+ years of experience building end-to-end ML pipelines and deploying production systems.
+                        </p>
+                        <p class="text-gray-300 text-lg leading-relaxed">
+                            My expertise spans <span class="text-cyan-400 font-semibold">intelligent automation</span>, <span class="text-cyan-400 font-semibold">applied AI research</span>, and <span class="text-cyan-400 font-semibold">LLM-based agents</span>.
+                        </p>
+                        <p class="text-gray-300 text-lg leading-relaxed">
+                            I've built automated document understanding systems, RPA workflows, and multi-tool agents using modern frameworks like LangChain and FastAPI.
+                        </p>
+                    </div>
+                    
+                    <div class="grid grid-cols-2 gap-6">
+                        <div class="glass p-6 text-center">
+                            <div class="stat-number">5+</div>
+                            <p class="text-gray-400 text-sm mt-2">Years Experience</p>
+                        </div>
+                        <div class="glass p-6 text-center">
+                            <div class="stat-number">20+</div>
+                            <p class="text-gray-400 text-sm mt-2">Projects Built</p>
+                        </div>
+                        <div class="glass p-6 text-center">
+                            <div class="stat-number">2</div>
+                            <p class="text-gray-400 text-sm mt-2">Publications</p>
+                        </div>
+                        <div class="glass p-6 text-center">
+                            <div class="stat-number" id="github-stars">--</div>
+                            <p class="text-gray-400 text-sm mt-2">Total Stars</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Skills Section -->
+        <section class="py-20 px-4 border-t border-gray-700 border-opacity-30">
+            <div class="max-w-6xl mx-auto">
+                <h2 class="text-3xl md:text-4xl font-bold mb-12 gradient-text">Skills & Technologies</h2>
+                
+                <div class="grid md:grid-cols-4 gap-6">
+                    <div class="glass p-6">
+                        <h3 class="text-cyan-400 font-semibold mb-4 flex items-center gap-2">
+                            <i class="fas fa-code"></i> Languages
+                        </h3>
+                        <ul class="space-y-2">
+                            <li class="text-gray-400 text-sm">• Python</li>
+                            <li class="text-gray-400 text-sm">• SQL</li>
+                            <li class="text-gray-400 text-sm">• JavaScript</li>
+                            <li class="text-gray-400 text-sm">• HTML / CSS</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="glass p-6">
+                        <h3 class="text-cyan-400 font-semibold mb-4 flex items-center gap-2">
+                            <i class="fas fa-brain"></i> ML/AI Frameworks
+                        </h3>
+                        <ul class="space-y-2">
+                            <li class="text-gray-400 text-sm">• TensorFlow</li>
+                            <li class="text-gray-400 text-sm">• PyTorch</li>
+                            <li class="text-gray-400 text-sm">• LangChain</li>
+                            <li class="text-gray-400 text-sm">• Scikit-learn</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="glass p-6">
+                        <h3 class="text-cyan-400 font-semibold mb-4 flex items-center gap-2">
+                            <i class="fas fa-rocket"></i> DevOps & Tools
+                        </h3>
+                        <ul class="space-y-2">
+                            <li class="text-gray-400 text-sm">• FastAPI</li>
+                            <li class="text-gray-400 text-sm">• Docker</li>
+                            <li class="text-gray-400 text-sm">• MLflow</li>
+                            <li class="text-gray-400 text-sm">• Git</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="glass p-6">
+                        <h3 class="text-cyan-400 font-semibold mb-4 flex items-center gap-2">
+                            <i class="fas fa-star"></i> Specializations
+                        </h3>
+                        <ul class="space-y-2">
+                            <li class="text-gray-400 text-sm">• Machine Learning</li>
+                            <li class="text-gray-400 text-sm">• Computer Vision</li>
+                            <li class="text-gray-400 text-sm">• NLP</li>
+                            <li class="text-gray-400 text-sm">• LLM Agents</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Projects Section -->
+        <section id="projects" class="py-20 px-4 border-t border-gray-700 border-opacity-30">
+            <div class="max-w-6xl mx-auto">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4 gradient-text">Projects</h2>
+                <p class="text-gray-400 mb-8">Automatically fetched from my GitHub repositories</p>
+                
+                <!-- Filter Buttons -->
+                <div class="flex flex-wrap gap-3 mb-12">
+                    <button class="filter-btn active badge cursor-pointer" data-filter="all">
+                        All Projects
+                    </button>
+                    <button class="filter-btn badge cursor-pointer" data-filter="Python">
+                        <i class="fab fa-python mr-1"></i> Python
+                    </button>
+                    <button class="filter-btn badge cursor-pointer" data-filter="JavaScript">
+                        <i class="fab fa-js mr-1"></i> JavaScript
+                    </button>
+                    <button class="filter-btn badge cursor-pointer" data-filter="TypeScript">
+                        <i class="fas fa-code mr-1"></i> TypeScript
+                    </button>
+                    <button class="filter-btn badge cursor-pointer" data-filter="Other">
+                        More
+                    </button>
+                </div>
+                
+                <!-- Projects Grid -->
+                <div id="projects-grid" class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <!-- Loading skeletons -->
+                    <div class="glass p-6 skeleton h-64"></div>
+                    <div class="glass p-6 skeleton h-64"></div>
+                    <div class="glass p-6 skeleton h-64"></div>
+                </div>
+                
+                <!-- Empty state -->
+                <div id="empty-state" class="hidden text-center py-12">
+                    <i class="fas fa-inbox text-4xl text-gray-500 mb-4"></i>
+                    <p class="text-gray-400">No projects found matching this filter</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Stats Section -->
+        <section id="stats" class="py-20 px-4 border-t border-gray-700 border-opacity-30">
+            <div class="max-w-6xl mx-auto">
+                <h2 class="text-3xl md:text-4xl font-bold mb-12 gradient-text">GitHub Statistics</h2>
+                
+                <div class="grid md:grid-cols-4 gap-6">
+                    <div class="glass p-8 text-center">
+                        <div class="stat-number" id="stat-repos">--</div>
+                        <p class="text-gray-400 text-sm mt-2">Public Repositories</p>
+                    </div>
+                    <div class="glass p-8 text-center">
+                        <div class="stat-number" id="stat-stars">--</div>
+                        <p class="text-gray-400 text-sm mt-2">Total Stars</p>
+                    </div>
+                    <div class="glass p-8 text-center">
+                        <div class="stat-number" id="stat-followers">--</div>
+                        <p class="text-gray-400 text-sm mt-2">Followers</p>
+                    </div>
+                    <div class="glass p-8 text-center">
+                        <div class="stat-number" id="stat-following">--</div>
+                        <p class="text-gray-400 text-sm mt-2">Following</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="py-20 px-4 border-t border-gray-700 border-opacity-30">
+            <div class="max-w-2xl mx-auto text-center">
+                <h2 class="text-3xl md:text-4xl font-bold mb-6 gradient-text">Let's Connect</h2>
+                <p class="text-xl text-gray-400 mb-12">
+                    Interested in collaborating on AI/ML projects? Let's build something amazing together.
+                </p>
+                
+                <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                    <a href="mailto:samardas.cca@gmail.com" class="inline-flex items-center justify-center gap-2 px-8 py-3 rounded-lg bg-gradient-to-r from-cyan-500 to-blue-500 text-gray-900 font-semibold hover:shadow-lg hover:shadow-cyan-500/50">
+                        <i class="fas fa-envelope"></i> Email Me
+                    </a>
+                    <a href="https://github.com/samar018" target="_blank" class="inline-flex items-center justify-center gap-2 px-8 py-3 rounded-lg border border-cyan-400 text-cyan-400 font-semibold hover:bg-cyan-400/10">
+                        <i class="fab fa-github"></i> GitHub Profile
+                    </a>
+                    <a href="https://linkedin.com/in/samardas" target="_blank" class="inline-flex items-center justify-center gap-2 px-8 py-3 rounded-lg border border-purple-400 text-purple-400 font-semibold hover:bg-purple-400/10">
+                        <i class="fab fa-linkedin"></i> LinkedIn
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="border-t border-gray-700 border-opacity-30 py-8 px-4 text-center text-gray-500 text-sm">
+            <p>© 2025 Samar Das. Built with AI & deployed to GitHub Pages. <span class="text-cyan-400">❤️</span></p>
+        </footer>
+    </div>
+
+    <script>
+        const GITHUB_USERNAME = 'samar018';
+        const API_BASE = 'https://api.github.com';
+        
+        let allRepositories = [];
+        let filteredRepositories = [];
+        
+        // Language color mapping
+        const languageColors = {
+            'Python': '#3776ab',
+            'JavaScript': '#f1e05a',
+            'TypeScript': '#3178c6',
+            'HTML': '#e34c26',
+            'CSS': '#563d7c',
+            'Java': '#b07219',
+            'C++': '#f34b7d',
+            'Go': '#00add8',
+            'Rust': '#ce422b',
+            'Vue': '#41b883',
+            'React': '#61dafb',
+            'Shell': '#89e051',
+        };
+        
+        // Fetch GitHub data
+        async function fetchGitHubData() {
+            try {
+                // Fetch user data
+                const userRes = await fetch(`${API_BASE}/users/${GITHUB_USERNAME}`);
+                const userData = await userRes.json();
+                
+                // Update profile stats
+                updateStats(userData);
+                
+                // Fetch repositories
+                const reposRes = await fetch(
+                    `${API_BASE}/users/${GITHUB_USERNAME}/repos?sort=stars&order=desc&per_page=100`
+                );
+                const repos = await reposRes.json();
+                
+                // Filter out forks and process data
+                allRepositories = repos
+                    .filter(repo => !repo.fork && !repo.private)
+                    .map(repo => ({
+                        name: repo.name,
+                        description: repo.description || 'No description',
+                        url: repo.html_url,
+                        stars: repo.stargazers_count,
+                        forks: repo.forks_count,
+                        language: repo.language || 'Other',
+                        topics: repo.topics || [],
+                        updated: new Date(repo.updated_at).toLocaleDateString(),
+                    }));
+                
+                filteredRepositories = allRepositories;
+                renderProjects(filteredRepositories);
+                
+            } catch (error) {
+                console.error('Error fetching GitHub data:', error);
+                document.getElementById('projects-grid').innerHTML = `
+                    <div class="col-span-full text-center py-12">
+                        <p class="text-red-400">Failed to load projects. Please try again later.</p>
+                    </div>
+                `;
+            }
+        }
+        
+        // Update statistics
+        function updateStats(userData) {
+            document.getElementById('stat-repos').textContent = userData.public_repos;
+            document.getElementById('stat-followers').textContent = userData.followers;
+            document.getElementById('stat-following').textContent = userData.following;
+            
+            // Calculate total stars
+            if (allRepositories.length > 0) {
+                const totalStars = allRepositories.reduce((sum, repo) => sum + repo.stars, 0);
+                document.getElementById('stat-stars').textContent = totalStars;
+                document.getElementById('github-stars').textContent = totalStars;
+            }
+        }
+        
+        // Render projects
+        function renderProjects(repos) {
+            const grid = document.getElementById('projects-grid');
+            const emptyState = document.getElementById('empty-state');
+            
+            if (repos.length === 0) {
+                grid.innerHTML = '';
+                emptyState.classList.remove('hidden');
+                return;
+            }
+            
+            emptyState.classList.add('hidden');
+            grid.innerHTML = repos.map((repo, index) => `
+                <a href="${repo.url}" target="_blank" rel="noopener noreferrer" 
+                   class="glass p-6 rounded-lg hover:border-cyan-400 group cursor-pointer fade-in"
+                   style="animation-delay: ${index * 50}ms">
+                    
+                    <div class="flex items-start justify-between mb-3">
+                        <div class="flex-1">
+                            <h3 class="text-lg font-semibold text-cyan-400 group-hover:text-cyan-300 transition mb-1 flex items-center gap-2">
+                                <i class="fas fa-code-branch text-sm"></i>
+                                ${repo.name}
+                            </h3>
+                        </div>
+                        <i class="fas fa-external-link-alt text-gray-600 group-hover:text-cyan-400 transition text-sm"></i>
+                    </div>
+                    
+                    <p class="text-gray-400 text-sm mb-4 line-clamp-2">
+                        ${repo.description}
+                    </p>
+                    
+                    <div class="flex flex-wrap gap-2 mb-4">
+                        ${repo.topics.slice(0, 3).map(topic => `
+                            <span class="text-xs bg-purple-400/20 text-purple-300 px-2 py-1 rounded">
+                                ${topic}
+                            </span>
+                        `).join('')}
+                    </div>
+                    
+                    <div class="flex items-center justify-between pt-4 border-t border-gray-700 border-opacity-30">
+                        <div class="flex gap-4">
+                            <span class="text-xs text-gray-500 flex items-center gap-1">
+                                <i class="fas fa-star"></i> ${repo.stars}
+                            </span>
+                            <span class="text-xs text-gray-500 flex items-center gap-1">
+                                <i class="fas fa-code-branch"></i> ${repo.forks}
+                            </span>
+                        </div>
+                        ${repo.language ? `
+                            <span class="lang-badge">
+                                <span class="lang-dot" style="background-color: ${languageColors[repo.language] || '#999'}"></span>
+                                ${repo.language}
+                            </span>
+                        ` : ''}
+                    </div>
+                </a>
+            `).join('');
+        }
+        
+        // Filter projects
+        document.querySelectorAll('.filter-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                // Update active state
+                document.querySelectorAll('.filter-btn').forEach(b => {
+                    b.classList.remove('!border-cyan-400', '!text-cyan-300');
+                    b.style.background = '';
+                });
+                btn.classList.add('!border-cyan-400', '!text-cyan-300');
+                
+                const filter = btn.dataset.filter;
+                
+                if (filter === 'all') {
+                    filteredRepositories = allRepositories;
+                } else {
+                    filteredRepositories = allRepositories.filter(repo => 
+                        repo.language === filter
+                    );
+                }
+                
+                renderProjects(filteredRepositories);
+            });
+        });
+        
+        // Smooth scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                const href = this.getAttribute('href');
+                if (href !== '#') {
+                    e.preventDefault();
+                    const target = document.querySelector(href);
+                    if (target) {
+                        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    }
+                }
+            });
+        });
+        
+        // Fetch data on page load
+        window.addEventListener('load', fetchGitHubData);
+        
+        // Optional: Refresh data every 30 minutes
+        setInterval(fetchGitHubData, 30 * 60 * 1000);
+    </script>
+</body>
+</html>
